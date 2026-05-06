@@ -6,12 +6,14 @@ import json
 import logging
 import os
 import random
+import secrets
 import socket
 import time
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from typing import AsyncIterator, Optional
+from urllib.parse import urlsplit, urlunsplit
 
 import aiohttp
 from aiohttp import ClientError, ClientTimeout, WSMsgType, web
@@ -75,7 +77,11 @@ class Config:
     def from_env(cls) -> "Config":
         proxy_token = os.getenv("PROXY_TOKEN", "").strip()
         if not proxy_token:
-            raise RuntimeError("PROXY_TOKEN is required")
+            proxy_token = secrets.token_urlsafe(32)
+            print(
+                "WARNING: PROXY_TOKEN was not set. Generated an ephemeral token for this deployment.",
+                flush=True,
+            )
 
         return cls(
             port=int(os.getenv("PORT", "8080")),
