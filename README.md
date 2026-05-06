@@ -5,11 +5,9 @@ A high-anonymity HTTP/HTTPS proxy with obfuscation features designed to hide you
 ## Key Features for Anonymity
 
 - **DNS-over-HTTPS Resolution**: Prevents DNS leaks by resolving hostnames through encrypted DoH endpoints
-- **Traffic Obfuscation**: Random padding added to responses to obscure true content sizes
 - **Timing Jitter**: Random delays added to mask traffic patterns
 - **User Agent Rotation**: Makes traffic appear as various clients
 - **No Request Logging**: Zero logging of client activity
-- **Response Padding**: Obscures content length from size-based fingerprinting
 
 ## What IP is Hidden
 
@@ -36,7 +34,6 @@ Your applications must be configured to use this proxy for DNS resolution, OR yo
 - Requires bearer token authentication on every request
 - Blocks requests to private/internal/reserved destinations
 - DNS resolution via encrypted DoH (Cloudflare, Google, OpenDNS)
-- Traffic padding to obscure content sizes
 - Timing jitter to prevent pattern analysis
 - No request/response logging
 - In-memory rate limiting per client
@@ -53,8 +50,6 @@ Optional:
 - `REQUEST_TIMEOUT`: Timeout in seconds, default `30`
 - `RATE_LIMIT_REQUESTS`: Max requests per window, default `120`
 - `RATE_LIMIT_WINDOW`: Window length seconds, default `60`
-- `MIN_PADDING`: Minimum padding bytes, default `1024`
-- `MAX_PADDING`: Maximum padding bytes, default `8192`
 
 ## Local Run
 
